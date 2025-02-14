@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Илона, ты будешь моей валентинкой?</title>
+    <meta name="description" content="Романтическая интерактивная страница на День Святого Валентина!">
+    <meta name="author" content="Aldik">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+        h1 {
+            font-size: 2em;
+            color: red;
+            position: relative;
+            z-index: 1;
+            transition: opacity 1s ease;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            transition: opacity 1s ease;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .yes {
+            background-color: red;
+            color: white;
+        }
+        .no {
+            background-color: white;
+            color: red;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: floatUp 5s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+        .celebrate {
+            background-color: #ffccd5 !important;
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .love-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: white;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Илона, ты будешь моей валентинкой?</h1>
+    <div class="buttons">
+        <button class="yes" onclick="sayYes()">Да</button>
+        <button class="no" onclick="makeYesBigger()">Нет</button>
+    </div>
+    <div class="love-message">Ура! С Днём святого Валентина! ❤️</div>
+    <div class="footer">Сделано: Aldik</div>
+
+    <script>
+        let yesButton = document.querySelector('.yes');
+        let size = 20;
+        let body = document.body;
+        let loveMessage = document.querySelector('.love-message');
+
+        function makeYesBigger() {
+            size += 10;
+            yesButton.style.fontSize = size + 'px';
+            yesButton.style.padding = (size / 2) + 'px ' + (size) + 'px';
+            if (size >= 200) {
+                yesButton.style.width = '100vw';
+                yesButton.style.height = '100vh';
+            }
+        }
+
+        function sayYes() {
+            body.classList.add('celebrate');
+            document.querySelector('h1').classList.add('hidden');
+            document.querySelector('.buttons').classList.add('hidden');
+            loveMessage.style.opacity = '1';
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
